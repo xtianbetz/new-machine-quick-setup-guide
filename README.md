@@ -10,6 +10,14 @@
 
 -   Install rust toolset
 
+# Git Config (~/.gitconfig)
+
+    [user]
+        email = christian.betz@gmail.com
+        name = Christian Betz
+    [init]
+        defaultBranch = main
+
 # Bashrc Customizations
 
 Eventually load all customizations from ~/.bash (a git repo)
