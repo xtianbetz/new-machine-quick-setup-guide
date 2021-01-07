@@ -1,4 +1,5 @@
-# Checklist
+Checklist
+=========
 
 -   Programs; strace, lsof, patch, jq
 
@@ -10,7 +11,8 @@
 
 -   Install rust toolset
 
-# Git Config (~/.gitconfig)
+Git Config (~/.gitconfig)
+=========================
 
     [user]
         email = christian.betz@gmail.com
@@ -18,7 +20,8 @@
     [init]
         defaultBranch = main
 
-# Bashrc Customizations
+Bashrc Customizations
+=====================
 
 Eventually load all customizations from ~/.bash (a git repo)
 
@@ -51,11 +54,44 @@ Eventually load all customizations from ~/.bash (a git repo)
     export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
     # Various toolchains
-    export PATH="$HOME/Toolchains/VSCode-linux-x64/bin:$HOME/Toolchains/dotnet-core-3.1:$HOME/Toolchains/gcc-arm-none-eabi-9-2020-q2-update/bin:$PATH"
+    export PATH="$HOME/Toolchains/VSCode-linux-x64/bin:$HOME/Toolchains/dotnet-core-3.1:$HOME/Toolchains/gcc-arm-none-eabi-9-2020-q2-update/bin:$HOME/Toolchains/node-v14.15.4-linux-x64/bin:$PATH"
 
     # Python setuptools (i.e. for using "python setup.py install --user")
     export PATH="${HOME}/.local/bin:$PATH"
 
-# Keyboard Shortcuts
+Keyboard Shortcuts
+==================
 
 -   Ctrl-T for new terminal
+
+Install dotnet
+==============
+
+Download the latest dotnet and extract in $HOME/Toolchains. Configure
+PATH accordingly in bashrc as shown above.
+
+Install Node, Yarn
+==================
+
+Download node and extract it in $HOME/Toolchains. Configure your PATH
+accordingly as shown above.
+
+Use the following commands to configure 'npm' to install "global"
+packages into your home directory.
+
+    mkdir "${HOME}/.npm-packages"
+    npm config set prefix "${HOME}/.npm-packages"
+
+Setup Neovim
+============
+
+Download nvim.appimage and put it in $HOME/bin.
+
+Install nvim configs stuff
+
+    cd ~/.config
+    git clone git@github.com:xtianbetz/.vim.git nvim --recurse-submodules
+
+Inside nvim you will need to install interesting things:
+
+    :CocInstall coc-tsserver coc-json coc-html coc-css coc-phpls coc-omnisharp

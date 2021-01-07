@@ -446,6 +446,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_git_config_gitconfig">Git Config (~/.gitconfig)</a></li>
 <li><a href="#_bashrc_customizations">Bashrc Customizations</a></li>
 <li><a href="#_keyboard_shortcuts">Keyboard Shortcuts</a></li>
+<li><a href="#_install_dotnet">Install dotnet</a></li>
+<li><a href="#_install_node_yarn">Install Node, Yarn</a></li>
+<li><a href="#_setup_neovim">Setup Neovim</a></li>
 </ul>
 </div>
 </div>
@@ -525,7 +528,7 @@ export PATH="$PATH:$NPM_PACKAGES/bin"
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
 # Various toolchains
-export PATH="$HOME/Toolchains/VSCode-linux-x64/bin:$HOME/Toolchains/dotnet-core-3.1:$HOME/Toolchains/gcc-arm-none-eabi-9-2020-q2-update/bin:$PATH"
+export PATH="$HOME/Toolchains/VSCode-linux-x64/bin:$HOME/Toolchains/dotnet-core-3.1:$HOME/Toolchains/gcc-arm-none-eabi-9-2020-q2-update/bin:$HOME/Toolchains/node-v14.15.4-linux-x64/bin:$PATH"
 
 # Python setuptools (i.e. for using "python setup.py install --user")
 export PATH="${HOME}/.local/bin:$PATH"</pre>
@@ -545,10 +548,63 @@ export PATH="${HOME}/.local/bin:$PATH"</pre>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_install_dotnet">Install dotnet</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Download the latest dotnet and extract in $HOME/Toolchains. Configure PATH
+accordingly in bashrc as shown above.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_install_node_yarn">Install Node, Yarn</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Download node and extract it in $HOME/Toolchains. Configure your PATH
+accordingly as shown above.</p>
+</div>
+<div class="paragraph">
+<p>Use the following commands to configure 'npm' to install "global" packages into
+your home directory.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>mkdir "${HOME}/.npm-packages"
+npm config set prefix "${HOME}/.npm-packages"</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_setup_neovim">Setup Neovim</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Download nvim.appimage and put it in $HOME/bin.</p>
+</div>
+<div class="paragraph">
+<p>Install nvim configs stuff</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>cd ~/.config
+git clone git@github.com:xtianbetz/.vim.git nvim --recurse-submodules</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Inside nvim you will need to install interesting things:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>:CocInstall coc-tsserver coc-json coc-html coc-css coc-phpls coc-omnisharp</pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-01-01 16:08:41 -0500
+Last updated 2021-01-06 14:05:09 -0500
 </div>
 </div>
 </body>
