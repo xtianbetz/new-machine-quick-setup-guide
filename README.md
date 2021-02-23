@@ -95,3 +95,13 @@ Install nvim configs stuff
 Inside nvim you will need to install interesting things:
 
     :CocInstall coc-tsserver coc-json coc-html coc-css coc-phpls coc-omnisharp
+
+Install AWS CLI
+===============
+
+    cd ~/Downloads/
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    unzip awscliv2.zip
+    cd aws/
+    ./install -i $HOME/Toolchains/aws-cli -b $HOME/bin
+    aws --version
