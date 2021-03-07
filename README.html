@@ -449,6 +449,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_install_dotnet">Install dotnet</a></li>
 <li><a href="#_install_node_yarn">Install Node, Yarn</a></li>
 <li><a href="#_setup_neovim">Setup Neovim</a></li>
+<li><a href="#_installsetup_vs_code">Install/Setup VS Code</a></li>
 <li><a href="#_install_aws_cli">Install AWS CLI</a></li>
 </ul>
 </div>
@@ -470,6 +471,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li>
 <p>Setup NVIM using nvim.appimage and restore VIM config dir from git</p>
+</li>
+<li>
+<p>Install VS Code</p>
 </li>
 <li>
 <p>Install rust toolset</p>
@@ -603,6 +607,35 @@ git clone git@github.com:xtianbetz/.vim.git nvim --recurse-submodules</pre>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_installsetup_vs_code">Install/Setup VS Code</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Download VS Code to ~/Toolchains/VSCode-linux-x64</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Add desktop entry ~/.local/share/applications/vscode.desktop:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Visual Studio Code
+Icon=/var/home/x/Toolchains/VSCode-linux-x64/resources/app/resources/linux/code.png
+Exec=/var/home/x/Toolchains/VSCode-linux-x64/bin/code
+Comment=A cross-platform IDE for Everything
+Categories=Development;IDE;
+Terminal=false
+StartupNotify=true</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_install_aws_cli">Install AWS CLI</h2>
 <div class="sectionbody">
 <div class="literalblock">
@@ -620,7 +653,7 @@ aws --version</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-02-23 10:44:22 -0500
+Last updated 2021-03-07 18:17:11 -0500
 </div>
 </div>
 </body>

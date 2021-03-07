@@ -9,6 +9,8 @@ Checklist
 
 -   Setup NVIM using nvim.appimage and restore VIM config dir from git
 
+-   Install VS Code
+
 -   Install rust toolset
 
 Git Config (~/.gitconfig)
@@ -95,6 +97,24 @@ Install nvim configs stuff
 Inside nvim you will need to install interesting things:
 
     :CocInstall coc-tsserver coc-json coc-html coc-css coc-phpls coc-omnisharp
+
+Install/Setup VS Code
+=====================
+
+-   Download VS Code to ~/Toolchains/VSCode-linux-x64
+
+Add desktop entry ~/.local/share/applications/vscode.desktop:
+
+    [Desktop Entry]
+    Version=1.0
+    Type=Application
+    Name=Visual Studio Code
+    Icon=/var/home/x/Toolchains/VSCode-linux-x64/resources/app/resources/linux/code.png
+    Exec=/var/home/x/Toolchains/VSCode-linux-x64/bin/code
+    Comment=A cross-platform IDE for Everything
+    Categories=Development;IDE;
+    Terminal=false
+    StartupNotify=true
 
 Install AWS CLI
 ===============
