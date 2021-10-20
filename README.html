@@ -442,7 +442,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_general_checklist">General Checklist</a></li>
-<li><a href="#_silverblue_packages">Silverblue Packages</a></li>
+<li><a href="#_install_silverblue_packages">Install Silverblue Packages</a></li>
+<li><a href="#_set_the_hostname">Set the hostname</a></li>
+<li><a href="#_enable_sshd">Enable sshd</a></li>
 <li><a href="#_toolbox_notes">Toolbox Notes</a></li>
 <li><a href="#_download_tarballs_for_vs_code_and_rider">Download tarballs for VS Code and Rider</a></li>
 <li><a href="#_install_flatpaks_for_chromium_and_spotify">Install Flatpaks for Chromium and Spotify</a></li>
@@ -454,6 +456,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_setup_neovim">Setup Neovim</a></li>
 <li><a href="#_installsetup_vs_code">Install/Setup VS Code</a></li>
 <li><a href="#_install_aws_cli">Install AWS CLI</a></li>
+<li><a href="#_disable_intel_wifi_powersaving">Disable Intel Wifi Powersaving</a></li>
 </ul>
 </div>
 </div>
@@ -464,13 +467,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p>Apps: VS Code, Rider, Chromium, Spotify</p>
+<p>Download latest Fedora Silverblue and write to USB stick</p>
 </li>
 <li>
-<p>CLI programs: nvim, gcc/make/etc, strace, lsof, patch, jq</p>
+<p>Follow GUI installer, making space in partition tool if needed.</p>
 </li>
 <li>
-<p>Dev environments: Install latest nodejs, npm, yarn, cargo, etc.</p>
+<p>GUI apps: VS Code, Rider, Chromium, Spotify</p>
+</li>
+<li>
+<p>CLI apps: nvim, gcc/make/etc, strace, lsof, patch, jq</p>
+</li>
+<li>
+<p>Dev tools: nodejs, npm, yarn, cargo, dotnet, aws</p>
 </li>
 <li>
 <p>Setup git (name, email)</p>
@@ -479,21 +488,45 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Setup NVIM using nvim.appimage and restore VIM config dir from git</p>
 </li>
 <li>
-<p>Install VS Code</p>
+<p>Install and configure VS Code with custom vim config</p>
+</li>
+<li>
+<p>Install and configure Rider with custom vim config</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_silverblue_packages">Silverblue Packages</h2>
+<h2 id="_install_silverblue_packages">Install Silverblue Packages</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Install additional packages</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>sudo rpm-ostree install SDL-devel ccache chrpath diffstat docbook-dtds docbook5-schemas 'gcc-c++' jq libzip mesa-libGL-devel minicom openjade pandoc perl-Thread-Queue perl-bignum python3-GitPython python3-jinja2 rpcgen socat strace texinfo xterm rubygem-asciidoctor</pre>
+<pre>sudo rpm-ostree update
+sudo rpm-ostree install SDL-devel ccache chrpath diffstat docbook-dtds docbook5-schemas 'gcc-c++' jq libzip mesa-libGL-devel minicom openjade pandoc perl-Thread-Queue perl-bignum python3-GitPython python3-jinja2 rpcgen socat strace texinfo xterm rubygem-asciidoctor wireguard-tools</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_set_the_hostname">Set the hostname</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre>sudo hostnamectl set-hostname x1carbon</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_enable_sshd">Enable sshd</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre>sudo systemctl enable sshd.service --now</pre>
 </div>
 </div>
 </div>
@@ -696,10 +729,23 @@ aws --version</pre>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_disable_intel_wifi_powersaving">Disable Intel Wifi Powersaving</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>create /etc/modprobe.d/iwlwifi.conf with following contents:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>options iwlwifi beacon_timeout=128</pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-10-20 13:39:51 -0400
+Last updated 2021-10-20 14:03:38 -0400
 </div>
 </div>
 </body>

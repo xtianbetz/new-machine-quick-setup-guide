@@ -3,19 +3,35 @@
 
 == General Checklist
 
-- Apps: VS Code, Rider, Chromium, Spotify
-- CLI programs: nvim, gcc/make/etc, strace, lsof, patch, jq
-- Dev environments: Install latest nodejs, npm, yarn, cargo, etc.
+- Download latest Fedora Silverblue and write to USB stick
+- Follow GUI installer, making space in partition tool if needed.
+- GUI apps: VS Code, Rider, Chromium, Spotify
+- CLI apps: nvim, gcc/make/etc, strace, lsof, patch, jq
+- Dev tools: nodejs, npm, yarn, cargo, dotnet, aws
 - Setup git (name, email)
 - Setup NVIM using nvim.appimage and restore VIM config dir from git
-- Install VS Code
+- Install and configure VS Code with custom vim config
+- Install and configure Rider with custom vim config
 
-== Silverblue Packages
+== Install Silverblue Packages
 
 Install additional packages
 
 ....
-sudo rpm-ostree install SDL-devel ccache chrpath diffstat docbook-dtds docbook5-schemas 'gcc-c++' jq libzip mesa-libGL-devel minicom openjade pandoc perl-Thread-Queue perl-bignum python3-GitPython python3-jinja2 rpcgen socat strace texinfo xterm rubygem-asciidoctor
+sudo rpm-ostree update
+sudo rpm-ostree install SDL-devel ccache chrpath diffstat docbook-dtds docbook5-schemas 'gcc-c++' jq libzip mesa-libGL-devel minicom openjade pandoc perl-Thread-Queue perl-bignum python3-GitPython python3-jinja2 rpcgen socat strace texinfo xterm rubygem-asciidoctor wireguard-tools
+....
+
+== Set the hostname
+
+....
+sudo hostnamectl set-hostname x1carbon
+....
+
+== Enable sshd
+
+....
+sudo systemctl enable sshd.service --now
 ....
 
 == Toolbox Notes
@@ -148,3 +164,11 @@ cd aws/
 aws --version
 ....
 
+
+== Disable Intel Wifi Powersaving
+
+create /etc/modprobe.d/iwlwifi.conf with following contents:
+
+....
+options iwlwifi beacon_timeout=128
+....
