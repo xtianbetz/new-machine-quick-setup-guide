@@ -448,6 +448,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_git_config_gitconfig">Git Config (~/.gitconfig)</a></li>
 <li><a href="#_bashrc_customizations">Bashrc Customizations</a></li>
 <li><a href="#_keyboard_shortcuts">Keyboard Shortcuts</a></li>
+<li><a href="#_install_dotnet">Install dotnet</a></li>
+<li><a href="#_install_node_yarn">Install Node, Yarn</a></li>
+<li><a href="#_setup_neovim">Setup Neovim</a></li>
+<li><a href="#_installsetup_vs_code">Install/Setup VS Code</a></li>
+<li><a href="#_install_aws_cli">Install AWS CLI</a></li>
 </ul>
 </div>
 </div>
@@ -468,6 +473,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li>
 <p>Setup NVIM using nvim.appimage and restore VIM config dir from git</p>
+</li>
+<li>
+<p>Install VS Code</p>
 </li>
 <li>
 <p>Install rust toolset</p>
@@ -587,7 +595,7 @@ export PATH="$PATH:$NPM_PACKAGES/bin"
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
 # Various toolchains
-export PATH="$HOME/Toolchains/VSCode-linux-x64/bin:$HOME/Toolchains/dotnet-core-3.1:$HOME/Toolchains/gcc-arm-none-eabi-9-2020-q2-update/bin:$PATH"
+export PATH="$HOME/Toolchains/VSCode-linux-x64/bin:$HOME/Toolchains/dotnet-core-3.1:$HOME/Toolchains/gcc-arm-none-eabi-9-2020-q2-update/bin:$HOME/Toolchains/node-v14.15.4-linux-x64/bin:$PATH"
 
 # Python setuptools (i.e. for using "python setup.py install --user")
 export PATH="${HOME}/.local/bin:$PATH"</pre>
@@ -607,10 +615,107 @@ export PATH="${HOME}/.local/bin:$PATH"</pre>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_install_dotnet">Install dotnet</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Download the latest dotnet and extract in $HOME/Toolchains. Configure PATH
+accordingly in bashrc as shown above.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_install_node_yarn">Install Node, Yarn</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Download node and extract it in $HOME/Toolchains. Configure your PATH
+accordingly as shown above.</p>
+</div>
+<div class="paragraph">
+<p>Use the following commands to configure 'npm' to install "global" packages into
+your home directory.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>mkdir "${HOME}/.npm-packages"
+npm config set prefix "${HOME}/.npm-packages"</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_setup_neovim">Setup Neovim</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Download nvim.appimage and put it in $HOME/bin.</p>
+</div>
+<div class="paragraph">
+<p>Install nvim configs stuff</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>cd ~/.config
+git clone git@github.com:xtianbetz/.vim.git nvim --recurse-submodules</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Inside nvim you will need to install interesting things:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>:CocInstall coc-tsserver coc-json coc-html coc-css coc-phpls coc-omnisharp</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installsetup_vs_code">Install/Setup VS Code</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Download VS Code to ~/Toolchains/VSCode-linux-x64</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Add desktop entry ~/.local/share/applications/vscode.desktop:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Visual Studio Code
+Icon=/var/home/x/Toolchains/VSCode-linux-x64/resources/app/resources/linux/code.png
+Exec=/var/home/x/Toolchains/VSCode-linux-x64/bin/code
+Comment=A cross-platform IDE for Everything
+Categories=Development;IDE;
+Terminal=false
+StartupNotify=true</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_install_aws_cli">Install AWS CLI</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre>cd ~/Downloads/
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+cd aws/
+./install -i $HOME/Toolchains/aws-cli -b $HOME/bin
+aws --version</pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-10-20 13:04:07 -0400
+Last updated 2021-10-20 13:09:32 -0400
 </div>
 </div>
 </body>
