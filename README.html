@@ -441,9 +441,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_checklist">Checklist</a></li>
+<li><a href="#_general_checklist">General Checklist</a></li>
 <li><a href="#_silverblue_packages">Silverblue Packages</a></li>
 <li><a href="#_toolbox_notes">Toolbox Notes</a></li>
+<li><a href="#_download_tarballs_for_vs_code_and_rider">Download tarballs for VS Code and Rider</a></li>
 <li><a href="#_install_flatpaks_for_chromium_and_spotify">Install Flatpaks for Chromium and Spotify</a></li>
 <li><a href="#_git_config_gitconfig">Git Config (~/.gitconfig)</a></li>
 <li><a href="#_bashrc_customizations">Bashrc Customizations</a></li>
@@ -458,15 +459,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_checklist">Checklist</h2>
+<h2 id="_general_checklist">General Checklist</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>Programs; strace, lsof, patch, jq</p>
+<p>Apps: VS Code, Rider, Chromium, Spotify</p>
 </li>
 <li>
-<p>Install latest nodejs, npm, yarn.</p>
+<p>CLI programs: nvim, gcc/make/etc, strace, lsof, patch, jq</p>
+</li>
+<li>
+<p>Dev environments: Install latest nodejs, npm, yarn, cargo, etc.</p>
 </li>
 <li>
 <p>Setup git (name, email)</p>
@@ -476,9 +480,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li>
 <p>Install VS Code</p>
-</li>
-<li>
-<p>Install rust toolset</p>
 </li>
 </ul>
 </div>
@@ -512,6 +513,14 @@ rpm-ostree and rebooting.</p>
 <pre>toolbox enter
 sudo dnf install fuse fuse-libs rubygem-asciidoctor make pandoc</pre>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_download_tarballs_for_vs_code_and_rider">Download tarballs for VS Code and Rider</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Extract the tarballs underneath ~/Toolchains</p>
 </div>
 </div>
 </div>
@@ -562,43 +571,18 @@ sudo dnf install fuse fuse-libs rubygem-asciidoctor make pandoc</pre>
 <h2 id="_bashrc_customizations">Bashrc Customizations</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Eventually load all customizations from ~/.bash (a git repo)</p>
+<p>All customizations are now stored in the bash/x.sh file</p>
+</div>
+<div class="paragraph">
+<p>Create a ~/.bash directory and copy the files there.</p>
+</div>
+<div class="paragraph">
+<p>The following lines should be added to bashrc:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>alias e='$HOME/bin/nvim.appimage'
-alias vi='$HOME/bin/nvim.appimage'
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
-alias yaml2json="ruby -ryaml -rjson -e 'puts JSON.pretty_generate(YAML.load(ARGF))'"
-
-source ~/.bash/git-prompt.sh # Show git branch name at command prompt
-export GIT_PS1_SHOWCOLORHINTS=true # Option for git-prompt.sh to show branch name in color
-export GIT_PS1_SHOWDIRTYSTATE=true
-export GIT_PS1_SHOWUNTRACKEDFILES=true
-export GIT_PS1_SHOWUPSTREAM=true
-
-PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
-
-# Allow users to run "npm install -g ..." without sudo
-# See: https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md
-#  will also need:
-#  mkdir "${HOME}/.npm-packages"
-#  npm config set prefix "${HOME}/.npm-packages"
-NPM_PACKAGES="${HOME}/.npm-packages"
-
-export PATH="$PATH:$NPM_PACKAGES/bin"
-
-# Preserve MANPATH if you already defined it somewhere in your config.
-# Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
-export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
-
-# Various toolchains
-export PATH="$HOME/Toolchains/VSCode-linux-x64/bin:$HOME/Toolchains/dotnet-core-3.1:$HOME/Toolchains/gcc-arm-none-eabi-9-2020-q2-update/bin:$HOME/Toolchains/node-v14.15.4-linux-x64/bin:$PATH"
-
-# Python setuptools (i.e. for using "python setup.py install --user")
-export PATH="${HOME}/.local/bin:$PATH"</pre>
+<pre># Put all customizations into ~/.bash/x.sh
+source ~/.bash/x.sh</pre>
 </div>
 </div>
 </div>
@@ -715,7 +699,7 @@ aws --version</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-10-20 13:09:32 -0400
+Last updated 2021-10-20 13:39:51 -0400
 </div>
 </div>
 </body>
