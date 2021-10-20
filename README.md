@@ -1,4 +1,5 @@
-# Checklist
+Checklist
+=========
 
 -   Programs; strace, lsof, patch, jq
 
@@ -10,7 +11,41 @@
 
 -   Install rust toolset
 
-# Git Config (~/.gitconfig)
+Silverblue Packages
+===================
+
+Install additional packages
+
+    sudo rpm-ostree install SDL-devel ccache chrpath diffstat docbook-dtds docbook5-schemas 'gcc-c++' jq libzip mesa-libGL-devel minicom openjade pandoc perl-Thread-Queue perl-bignum python3-GitPython python3-jinja2 rpcgen socat strace texinfo xterm rubygem-asciidoctor
+
+Toolbox Notes
+=============
+
+The toolbox is a container you can use for install random stuff without
+using rpm-ostree and rebooting.
+
+The following command will allow making this document within toolbox:
+
+    toolbox enter
+    sudo dnf install fuse fuse-libs rubygem-asciidoctor make pandoc
+
+Install Flatpaks for Chromium and Spotify
+=========================================
+
+Add the flathub flatpak remote:
+
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+Install chromium:
+
+    flatpak install flathub org.chromium.Chromium
+
+Install spotify:
+
+    flatpak install flathub com.spotify.Client
+
+Git Config (~/.gitconfig)
+=========================
 
     [user]
         email = christian.betz@gmail.com
@@ -18,7 +53,8 @@
     [init]
         defaultBranch = main
 
-# Bashrc Customizations
+Bashrc Customizations
+=====================
 
 Eventually load all customizations from ~/.bash (a git repo)
 
@@ -56,6 +92,7 @@ Eventually load all customizations from ~/.bash (a git repo)
     # Python setuptools (i.e. for using "python setup.py install --user")
     export PATH="${HOME}/.local/bin:$PATH"
 
-# Keyboard Shortcuts
+Keyboard Shortcuts
+==================
 
 -   Ctrl-T for new terminal
