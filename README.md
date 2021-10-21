@@ -126,10 +126,19 @@ Inside nvim you will need to install interesting things:
 
     :CocInstall coc-tsserver coc-json coc-html coc-css coc-phpls coc-omnisharp
 
+Install/Setup JetBrains Rider
+=============================
+
+Extract Rider tar.gz under ~/Toolchains
+
+Install the vim extension.
+
+Use
+
 Install/Setup VS Code
 =====================
 
--   Download VS Code to ~/Toolchains/VSCode-linux-x64
+Download VS Code to ~/Toolchains/VSCode-linux-x64
 
 Add desktop entry ~/.local/share/applications/vscode.desktop:
 
@@ -143,6 +152,11 @@ Add desktop entry ~/.local/share/applications/vscode.desktop:
     Categories=Development;IDE;
     Terminal=false
     StartupNotify=true
+
+Launch 'Code' from GNOME launcher and immediately install the Vim and
+C\# extensions.
+
+TODO: link to settings.json for VIM vscode
 
 Install AWS CLI
 ===============
