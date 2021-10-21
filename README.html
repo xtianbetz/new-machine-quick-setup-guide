@@ -445,7 +445,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_install_silverblue_packages">Install Silverblue Packages</a></li>
 <li><a href="#_set_the_hostname">Set the hostname</a></li>
 <li><a href="#_enable_sshd">Enable sshd</a></li>
-<li><a href="#_toolbox_notes">Toolbox Notes</a></li>
 <li><a href="#_download_tarballs_for_vs_code_and_rider">Download tarballs for VS Code and Rider</a></li>
 <li><a href="#_install_flatpaks_for_chromium_and_spotify">Install Flatpaks for Chromium and Spotify</a></li>
 <li><a href="#_git_config_gitconfig">Git Config (~/.gitconfig)</a></li>
@@ -458,6 +457,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_installsetup_vs_code">Install/Setup VS Code</a></li>
 <li><a href="#_install_aws_cli">Install AWS CLI</a></li>
 <li><a href="#_disable_intel_wifi_powersaving">Disable Intel Wifi Powersaving</a></li>
+<li><a href="#_rust_with_arm_target_support">Rust with ARM Target Support</a></li>
+<li><a href="#_add_user_to_dialout_group_to_allow_use_of_serial_ports">Add user to dialout group to allow use of serial ports</a></li>
+<li><a href="#_toolbox_notes">Toolbox Notes</a></li>
 </ul>
 </div>
 </div>
@@ -502,12 +504,27 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_install_silverblue_packages">Install Silverblue Packages</h2>
 <div class="sectionbody">
 <div class="paragraph">
+<p>Update all packages</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sudo rpm-ostree update</pre>
+</div>
+</div>
+<div class="paragraph">
 <p>Install additional packages</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>sudo rpm-ostree update
-sudo rpm-ostree install SDL-devel ccache chrpath diffstat docbook-dtds docbook5-schemas 'gcc-c++' jq libzip mesa-libGL-devel minicom openjade pandoc perl-Thread-Queue perl-bignum python3-GitPython python3-jinja2 rpcgen socat strace texinfo xterm rubygem-asciidoctor wireguard-tools</pre>
+<pre>sudo rpm-ostree install SDL-devel ccache chrpath diffstat docbook-dtds docbook5-schemas 'gcc-c++' jq libzip mesa-libGL-devel minicom openjade pandoc perl-Thread-Queue perl-bignum python2 python3-GitPython python3-jinja2 rpcgen socat strace texinfo xterm rubygem-asciidoctor wireguard-tools</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally reboot to use all new pacakges</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sudo systemctl reboot</pre>
 </div>
 </div>
 </div>
@@ -533,24 +550,6 @@ sudo rpm-ostree install SDL-devel ccache chrpath diffstat docbook-dtds docbook5-
 </div>
 </div>
 <div class="sect1">
-<h2 id="_toolbox_notes">Toolbox Notes</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The toolbox is a container you can use for install random stuff without using
-rpm-ostree and rebooting.</p>
-</div>
-<div class="paragraph">
-<p>The following command will allow making this document within toolbox:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>toolbox enter
-sudo dnf install fuse fuse-libs rubygem-asciidoctor make pandoc</pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="_download_tarballs_for_vs_code_and_rider">Download tarballs for VS Code and Rider</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -562,34 +561,16 @@ sudo dnf install fuse fuse-libs rubygem-asciidoctor make pandoc</pre>
 <h2 id="_install_flatpaks_for_chromium_and_spotify">Install Flatpaks for Chromium and Spotify</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Add the flathub flatpak remote:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Install chromium:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>flatpak install flathub org.chromium.Chromium</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Install spotify:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>flatpak install flathub com.spotify.Client</pre>
-</div>
+<p>Run the 'bin/setup-flatpak-apps.sh' script</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_git_config_gitconfig">Git Config (~/.gitconfig)</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Example git config file:</p>
+</div>
 <div class="literalblock">
 <div class="content">
 <pre>[user]
@@ -627,7 +608,7 @@ source ~/.bash/x.sh</pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Ctrl-T for new terminal</p>
+<p>Ctrl+Alt+T for new terminal</p>
 </li>
 </ul>
 </div>
@@ -668,7 +649,7 @@ npm config set prefix "${HOME}/.npm-packages"</pre>
 <p>Download nvim.appimage and put it in $HOME/bin.</p>
 </div>
 <div class="paragraph">
-<p>Install nvim configs stuff</p>
+<p>Install nvim configs:</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -696,7 +677,10 @@ git clone git@github.com:xtianbetz/.vim.git nvim --recurse-submodules</pre>
 <p>Install the vim extension.</p>
 </div>
 <div class="paragraph">
-<p>Use</p>
+<p>Use ~/.ideavimrc for setup (see the ideavimrc in my vimrc repo)</p>
+</div>
+<div class="paragraph">
+<p>Install a Desktop shortcut from the 'Tools' menu.</p>
 </div>
 </div>
 </div>
@@ -734,15 +718,8 @@ StartupNotify=true</pre>
 <div class="sect1">
 <h2 id="_install_aws_cli">Install AWS CLI</h2>
 <div class="sectionbody">
-<div class="literalblock">
-<div class="content">
-<pre>cd ~/Downloads/
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
-cd aws/
-./install -i $HOME/Toolchains/aws-cli -b $HOME/bin
-aws --version</pre>
-</div>
+<div class="paragraph">
+<p>Use 'bin/install-aws-cli.sh'</p>
 </div>
 </div>
 </div>
@@ -759,10 +736,71 @@ aws --version</pre>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_rust_with_arm_target_support">Rust with ARM Target Support</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Install rust stable</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>rustup install stable</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Install the target needed to build for 32-bit ARM Linux:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>rustup target add armv7-unknown-linux-gnueabihf</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Modify ~/.cargo/config so linker works (note: this assumes you the right binary in
+~/Toolchains and in your PATH).</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[target.armv7-unknown-linux-gnueabihf]
+linker = "arm-none-linux-gnueabihf-gcc"</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_add_user_to_dialout_group_to_allow_use_of_serial_ports">Add user to dialout group to allow use of serial ports</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre>sudo su
+grep -E '^dialout:' /usr/lib/group &gt;&gt; /etc/group
+usermod -aG dialout x</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_toolbox_notes">Toolbox Notes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The toolbox is a container you can use for install random stuff without using
+rpm-ostree and rebooting.</p>
+</div>
+<div class="paragraph">
+<p>The following command will allow making this document within toolbox:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>toolbox enter
+sudo dnf install fuse fuse-libs rubygem-asciidoctor make pandoc</pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-10-20 20:49:29 -0400
+Last updated 2021-10-20 22:13:22 -0400
 </div>
 </div>
 </body>

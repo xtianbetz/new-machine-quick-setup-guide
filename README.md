@@ -22,10 +22,17 @@ General Checklist
 Install Silverblue Packages
 ===========================
 
-Install additional packages
+Update all packages
 
     sudo rpm-ostree update
-    sudo rpm-ostree install SDL-devel ccache chrpath diffstat docbook-dtds docbook5-schemas 'gcc-c++' jq libzip mesa-libGL-devel minicom openjade pandoc perl-Thread-Queue perl-bignum python3-GitPython python3-jinja2 rpcgen socat strace texinfo xterm rubygem-asciidoctor wireguard-tools
+
+Install additional packages
+
+    sudo rpm-ostree install SDL-devel ccache chrpath diffstat docbook-dtds docbook5-schemas 'gcc-c++' jq libzip mesa-libGL-devel minicom openjade pandoc perl-Thread-Queue perl-bignum python2 python3-GitPython python3-jinja2 rpcgen socat strace texinfo xterm rubygem-asciidoctor wireguard-tools
+
+Finally reboot to use all new pacakges
+
+    sudo systemctl reboot
 
 Set the hostname
 ================
@@ -37,17 +44,6 @@ Enable sshd
 
     sudo systemctl enable sshd.service --now
 
-Toolbox Notes
-=============
-
-The toolbox is a container you can use for install random stuff without
-using rpm-ostree and rebooting.
-
-The following command will allow making this document within toolbox:
-
-    toolbox enter
-    sudo dnf install fuse fuse-libs rubygem-asciidoctor make pandoc
-
 Download tarballs for VS Code and Rider
 =======================================
 
@@ -56,20 +52,12 @@ Extract the tarballs underneath ~/Toolchains
 Install Flatpaks for Chromium and Spotify
 =========================================
 
-Add the flathub flatpak remote:
-
-    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
-Install chromium:
-
-    flatpak install flathub org.chromium.Chromium
-
-Install spotify:
-
-    flatpak install flathub com.spotify.Client
+Run the 'bin/setup-flatpak-apps.sh' script
 
 Git Config (~/.gitconfig)
 =========================
+
+Example git config file:
 
     [user]
         email = christian.betz@gmail.com
@@ -92,7 +80,7 @@ The following lines should be added to bashrc:
 Keyboard Shortcuts
 ==================
 
--   Ctrl-T for new terminal
+-   Ctrl+Alt+T for new terminal
 
 Install dotnet
 ==============
@@ -117,7 +105,7 @@ Setup Neovim
 
 Download nvim.appimage and put it in $HOME/bin.
 
-Install nvim configs stuff
+Install nvim configs:
 
     cd ~/.config
     git clone git@github.com:xtianbetz/.vim.git nvim --recurse-submodules
@@ -133,7 +121,9 @@ Extract Rider tar.gz under ~/Toolchains
 
 Install the vim extension.
 
-Use
+Use ~/.ideavimrc for setup (see the ideavimrc in my vimrc repo)
+
+Install a Desktop shortcut from the 'Tools' menu.
 
 Install/Setup VS Code
 =====================
@@ -161,12 +151,7 @@ TODO: link to settings.json for VIM vscode
 Install AWS CLI
 ===============
 
-    cd ~/Downloads/
-    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-    unzip awscliv2.zip
-    cd aws/
-    ./install -i $HOME/Toolchains/aws-cli -b $HOME/bin
-    aws --version
+Use 'bin/install-aws-cli.sh'
 
 Disable Intel Wifi Powersaving
 ==============================
@@ -174,3 +159,38 @@ Disable Intel Wifi Powersaving
 create /etc/modprobe.d/iwlwifi.conf with following contents:
 
     options iwlwifi beacon_timeout=128
+
+Rust with ARM Target Support
+============================
+
+Install rust stable
+
+    rustup install stable
+
+Install the target needed to build for 32-bit ARM Linux:
+
+    rustup target add armv7-unknown-linux-gnueabihf
+
+Modify ~/.cargo/config so linker works (note: this assumes you the right
+binary in ~/Toolchains and in your PATH).
+
+    [target.armv7-unknown-linux-gnueabihf]
+    linker = "arm-none-linux-gnueabihf-gcc"
+
+Add user to dialout group to allow use of serial ports
+======================================================
+
+    sudo su
+    grep -E '^dialout:' /usr/lib/group >> /etc/group
+    usermod -aG dialout x
+
+Toolbox Notes
+=============
+
+The toolbox is a container you can use for install random stuff without
+using rpm-ostree and rebooting.
+
+The following command will allow making this document within toolbox:
+
+    toolbox enter
+    sudo dnf install fuse fuse-libs rubygem-asciidoctor make pandoc

@@ -47,7 +47,8 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
-export PATH="$HOME/Toolchains/node-v16.3.0-linux-x64/bin:$PATH"
+#export PATH="$HOME/Toolchains/node-v16.3.0-linux-x64/bin:$PATH"
+export PATH="$HOME/Toolchains/node-v14.18.1-linux-x64/bin:$PATH"
 
 export ATTENDANT_IP=192.168.3.51
 . "$HOME/.cargo/env"
