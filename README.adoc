@@ -18,14 +18,14 @@
 Install additional packages
 
 ....
-sudo rpm-ostree update
-sudo rpm-ostree install SDL-devel ccache chrpath diffstat docbook-dtds docbook5-schemas 'gcc-c++' jq libzip mesa-libGL-devel minicom openjade pandoc perl-Thread-Queue perl-bignum python3-GitPython python3-jinja2 rpcgen socat strace texinfo xterm rubygem-asciidoctor wireguard-tools
+sudo rpm-ostree upgrade
+rpm-ostree install ccache chrpath diffstat docbook5-schemas docbook-dtds gcc-c++ java-1.8.0-openjdk libzip mesa-libGL-devel minicom openjade pandoc perl-bignum perl-Thread-Queue python2 python3-GitPython python3-jinja2 rpcgen rubygem-asciidoctor SDL-devel socat strace texinfo wireguard-tools xterm google-chrome
 ....
 
 == Set the hostname
 
 ....
-sudo hostnamectl set-hostname x1carbon
+sudo hostnamectl set-hostname z13
 ....
 
 == Enable sshd
@@ -85,14 +85,9 @@ flatpak install flathub com.spotify.Client
 
 All customizations are now stored in the bash/x.sh file
 
-Create a ~/.bash directory and copy the files there.
+You also want git-prompt.sh which will give you a nice bash prompt.
 
-The following lines should be added to bashrc:
-
-....
-# Put all customizations into ~/.bash/x.sh
-source ~/.bash/x.sh
-....
+Create a ~/.bashrc.d directory and copy both files there.
 
 == Keyboard Shortcuts
 
@@ -102,6 +97,13 @@ source ~/.bash/x.sh
 
 Download the latest dotnet and extract in $HOME/Toolchains. Configure PATH
 accordingly in bashrc as shown above.
+
+Prevent build related to openssl errors by modifying /etc/ssl/openssl.cnf and
+commenting the line as shown here:
+
+....
+#openssl_conf = openssl_init
+....
 
 == Install Node, Yarn
 

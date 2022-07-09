@@ -505,8 +505,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>sudo rpm-ostree update
-sudo rpm-ostree install SDL-devel ccache chrpath diffstat docbook-dtds docbook5-schemas 'gcc-c++' jq libzip mesa-libGL-devel minicom openjade pandoc perl-Thread-Queue perl-bignum python3-GitPython python3-jinja2 rpcgen socat strace texinfo xterm rubygem-asciidoctor wireguard-tools</pre>
+<pre>sudo rpm-ostree upgrade
+rpm-ostree install ccache chrpath diffstat docbook5-schemas docbook-dtds gcc-c++ java-1.8.0-openjdk libzip mesa-libGL-devel minicom openjade pandoc perl-bignum perl-Thread-Queue python2 python3-GitPython python3-jinja2 rpcgen rubygem-asciidoctor SDL-devel socat strace texinfo wireguard-tools xterm google-chrome</pre>
 </div>
 </div>
 </div>
@@ -516,7 +516,7 @@ sudo rpm-ostree install SDL-devel ccache chrpath diffstat docbook-dtds docbook5-
 <div class="sectionbody">
 <div class="literalblock">
 <div class="content">
-<pre>sudo hostnamectl set-hostname x1carbon</pre>
+<pre>sudo hostnamectl set-hostname z13</pre>
 </div>
 </div>
 </div>
@@ -607,16 +607,10 @@ sudo dnf install fuse fuse-libs rubygem-asciidoctor make pandoc</pre>
 <p>All customizations are now stored in the bash/x.sh file</p>
 </div>
 <div class="paragraph">
-<p>Create a ~/.bash directory and copy the files there.</p>
+<p>You also want git-prompt.sh which will give you a nice bash prompt.</p>
 </div>
 <div class="paragraph">
-<p>The following lines should be added to bashrc:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre># Put all customizations into ~/.bash/x.sh
-source ~/.bash/x.sh</pre>
-</div>
+<p>Create a ~/.bashrc.d directory and copy both files there.</p>
 </div>
 </div>
 </div>
@@ -638,6 +632,15 @@ source ~/.bash/x.sh</pre>
 <div class="paragraph">
 <p>Download the latest dotnet and extract in $HOME/Toolchains. Configure PATH
 accordingly in bashrc as shown above.</p>
+</div>
+<div class="paragraph">
+<p>Prevent build related to openssl errors by modifying /etc/ssl/openssl.cnf and
+commenting the line as shown here:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>#openssl_conf = openssl_init</pre>
+</div>
 </div>
 </div>
 </div>
@@ -745,7 +748,7 @@ aws --version</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-10-20 14:03:38 -0400
+Last updated 2022-07-09 12:33:19 -0400
 </div>
 </div>
 </body>

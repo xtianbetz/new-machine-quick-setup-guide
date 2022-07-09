@@ -5,7 +5,6 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 alias yaml2json="ruby -ryaml -rjson -e 'puts JSON.pretty_generate(YAML.load(ARGF))'"
 
-source ~/.bash/git-prompt.sh # Show git branch name at command prompt
 export GIT_PS1_SHOWCOLORHINTS=true # Option for git-prompt.sh to show branch name in color
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
@@ -47,7 +46,8 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
-export PATH="$HOME/Toolchains/node-v16.3.0-linux-x64/bin:$PATH"
+#export PATH="$HOME/Toolchains/node-v16.3.0-linux-x64/bin:$PATH"
+export PATH="$HOME/Toolchains/node-v14.18.1-linux-x64/bin:$PATH"
 
 export ATTENDANT_IP=192.168.3.51
 . "$HOME/.cargo/env"
