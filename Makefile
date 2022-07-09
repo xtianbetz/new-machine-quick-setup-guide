@@ -3,6 +3,7 @@ HTMLPAGES = $(SOURCES:.adoc=.html)
 MARKDOWNPAGES = $(SOURCES:.adoc=.md)
 
 all: $(HTMLPAGES) $(MARKDOWNPAGES)
+	cp README.html index.html
 
 %.html: %.adoc
 	asciidoctor $^
