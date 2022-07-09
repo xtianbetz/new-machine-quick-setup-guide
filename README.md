@@ -1,10 +1,13 @@
-# General Checklist
+Setup checklist and guide for getting up and running quickly on a new
+Fedora Silverblue installation
+
+# Checklist
 
 -   Download latest Fedora Silverblue and write to USB stick
 
 -   Follow GUI installer, making space in partition tool if needed.
 
--   GUI apps: VS Code, Rider, Chromium, Spotify
+-   GUI apps: VS Code, Rider, Chrome, Spotify
 
 -   CLI apps: nvim, gcc/make/etc, strace, lsof, patch, jq
 
@@ -18,44 +21,94 @@
 
 -   Install and configure Rider with custom vim config
 
-# Install Silverblue Packages
+# Make Drive Space for Fedora Install
 
-Update all packages
+You probably already have Windows installed on your PC or laptop. This
+installation is likely taking up nearly the whole drive so you need to
+make space for Linux.
 
-    sudo rpm-ostree update
+Good news: Recent versions of Windows allow you to easily resize the
+primary partition (C:) using a built-in utility.
 
-Install additional packages
+# Download Fedora Silverblue
 
-    sudo rpm-ostree upgrade
-    rpm-ostree install ccache chrpath diffstat docbook5-schemas docbook-dtds gcc-c++ java-1.8.0-openjdk libzip mesa-libGL-devel minicom openjade pandoc perl-bignum perl-Thread-Queue python2 python3-GitPython python3-jinja2 rpcgen rubygem-asciidoctor SDL-devel socat strace texinfo wireguard-tools xterm google-chrome
+Get installation media here:
+<https://silverblue.fedoraproject.org/download>
 
-Finally reboot to use all new pacakges
+# Write Silverblue Installer to USB Drive
 
-    sudo systemctl reboot
+Use the Fedora Media Writer or your favorite disk image writing tool.
+
+# Install Fedora Silverblue
+
+-   Boot from the USB disk
+
+-   Select automatic partitioning
+
+-   Wait 10-20 minutes while installer does its thing
+
+# Firstboot Questions
+
+Enable third party software repositories so you can use closed-source
+software like proprietary GPU drivers (nvidia) and Google Chrome.
 
 # Set the hostname
 
-    sudo hostnamectl set-hostname z13
+    sudo hostnamectl set-hostname machinename
+
+# Install Silverblue Packages
+
+Before doing anything else, go ahead and update all packages.
+
+First, cancel any automatically running rpm-ostree tasks:
+
+    sudo rpm-ostree cancel
+
+Then refresh package metadata:
+
+    sudo rpm-ostree refresh-md
+
+Perform an atomic system upgrade:
+
+    sudo rpm-ostree upgrade
+
+Install additional layered packages. NOTE: These are the packages that I
+need in my everyday work/life:
+
+    rpm-ostree install ccache chrpath diffstat docbook5-schemas docbook-dtds gcc-c++ java-1.8.0-openjdk libzip mesa-libGL-devel minicom openjade pandoc perl-bignum perl-Thread-Queue python2 python3-GitPython python3-jinja2 rpcgen rubygem-asciidoctor SDL-devel socat strace texinfo wireguard-tools xterm google-chrome
+
+Finally reboot to use all new packages:
+
+    sudo systemctl reboot
 
 # Enable sshd
 
+Optional: Enable SSH access to your machine
+
     sudo systemctl enable sshd.service --now
 
-# Download tarballs for VS Code and Rider
+# Clone this repo
 
-Extract the tarballs underneath ~/Toolchains
+The new-machine-quick-setup-guide git repository contains this guide
+along with some useful scripts we will run:
+
+    cd ~/Code
+    git clone https://github.com/xtianbetz/new-machine-quick-setup-guide.git
+    cd new-machine-quick-setup-guide
 
 # Install Flatpaks for Chromium and Spotify
 
-Run the 'bin/setup-flatpak-apps.sh' script
+Run 'bin/setup-flatpak-apps.sh' script:
+
+    ./bin/setup-flatpak-apps.sh
 
 # Git Config (~/.gitconfig)
 
 Example git config file:
 
     [user]
-        email = christian.betz@gmail.com
-        name = Christian Betz
+        email = your.name@company.com
+        name = Your Name
     [init]
         defaultBranch = main
 
@@ -65,16 +118,23 @@ All customizations are now stored in the bash/x.sh file
 
 You also want git-prompt.sh which will give you a nice bash prompt.
 
-Create a ~/.bashrc.d directory and copy both files there.
+The default bashrc/bash\_profile on recent Fedora versions automatically
+searches for a .bashrc.d folder.
+
+Just create a ~/.bashrc.d directory and copy both files there.
+
+    mkdir -p ~/.bashrc.d
+
+Make sure to adjust any paths in x.sh for your desired tool versions.
 
 # Keyboard Shortcuts
 
--   Ctrl+Alt+T for new terminal
+Use gnome keyboard settings to add a custom mapping so Ctrl+Alt+T
+launches a new terminal
 
 # Install dotnet
 
-Download the latest dotnet and extract in $HOME/Toolchains. Configure
-PATH accordingly in bashrc as shown above.
+Download the latest dotnet and extract in $HOME/Toolchains.
 
 Prevent build related to openssl errors by modifying
 /etc/ssl/openssl.cnf and commenting the line as shown here:
@@ -83,8 +143,7 @@ Prevent build related to openssl errors by modifying
 
 # Install Node, Yarn
 
-Download node and extract it in $HOME/Toolchains. Configure your PATH
-accordingly as shown above.
+Download node and extract it in $HOME/Toolchains.
 
 Use the following commands to configure 'npm' to install "global"
 packages into your home directory.
@@ -101,7 +160,7 @@ Install nvim configs:
     cd ~/.config
     git clone git@github.com:xtianbetz/.vim.git nvim --recurse-submodules
 
-Inside nvim you will need to install interesting things:
+Inside nvim you will need to install a few interesting things:
 
     :CocInstall coc-tsserver coc-json coc-html coc-css coc-phpls coc-omnisharp
 
@@ -147,7 +206,11 @@ create /etc/modprobe.d/iwlwifi.conf with following contents:
 
     options iwlwifi beacon_timeout=128
 
-# Rust with ARM Target Support
+# Install Rust with ARM Target Support
+
+Get rustup:
+
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 Install rust stable
 
@@ -165,16 +228,19 @@ binary in ~/Toolchains and in your PATH).
 
 # Add user to dialout group to allow use of serial ports
 
+Let your user use serial ports like /dev/ttyUSB0
+
     sudo su
     grep -E '^dialout:' /usr/lib/group >> /etc/group
-    usermod -aG dialout x
+    usermod -aG dialout yourusername
 
 # Toolbox Notes
 
 The toolbox is a container you can use for install random stuff without
 using rpm-ostree and rebooting.
 
-The following command will allow making this document within toolbox:
+For example the following command will allow making this document within
+a toolbox:
 
     toolbox enter
     sudo dnf install fuse fuse-libs rubygem-asciidoctor make pandoc

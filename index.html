@@ -441,11 +441,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_general_checklist">General Checklist</a></li>
-<li><a href="#_install_silverblue_packages">Install Silverblue Packages</a></li>
+<li><a href="#_checklist">Checklist</a></li>
+<li><a href="#_make_drive_space_for_fedora_install">Make Drive Space for Fedora Install</a></li>
+<li><a href="#_download_fedora_silverblue">Download Fedora Silverblue</a></li>
+<li><a href="#_write_silverblue_installer_to_usb_drive">Write Silverblue Installer to USB Drive</a></li>
+<li><a href="#_install_fedora_silverblue">Install Fedora Silverblue</a></li>
+<li><a href="#_firstboot_questions">Firstboot Questions</a></li>
 <li><a href="#_set_the_hostname">Set the hostname</a></li>
+<li><a href="#_install_silverblue_packages">Install Silverblue Packages</a></li>
 <li><a href="#_enable_sshd">Enable sshd</a></li>
-<li><a href="#_download_tarballs_for_vs_code_and_rider">Download tarballs for VS Code and Rider</a></li>
+<li><a href="#_clone_this_repo">Clone this repo</a></li>
 <li><a href="#_install_flatpaks_for_chromium_and_spotify">Install Flatpaks for Chromium and Spotify</a></li>
 <li><a href="#_git_config_gitconfig">Git Config (~/.gitconfig)</a></li>
 <li><a href="#_bashrc_customizations">Bashrc Customizations</a></li>
@@ -457,15 +462,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_installsetup_vs_code">Install/Setup VS Code</a></li>
 <li><a href="#_install_aws_cli">Install AWS CLI</a></li>
 <li><a href="#_disable_intel_wifi_powersaving">Disable Intel Wifi Powersaving</a></li>
-<li><a href="#_rust_with_arm_target_support">Rust with ARM Target Support</a></li>
+<li><a href="#_install_rust_with_arm_target_support">Install Rust with ARM Target Support</a></li>
 <li><a href="#_add_user_to_dialout_group_to_allow_use_of_serial_ports">Add user to dialout group to allow use of serial ports</a></li>
 <li><a href="#_toolbox_notes">Toolbox Notes</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Setup checklist and guide for getting up and running quickly on a new Fedora
+Silverblue installation</p>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="_general_checklist">General Checklist</h2>
+<h2 id="_checklist">Checklist</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -476,7 +489,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Follow GUI installer, making space in partition tool if needed.</p>
 </li>
 <li>
-<p>GUI apps: VS Code, Rider, Chromium, Spotify</p>
+<p>GUI apps: VS Code, Rider, Chrome, Spotify</p>
 </li>
 <li>
 <p>CLI apps: nvim, gcc/make/etc, strace, lsof, patch, jq</p>
@@ -501,27 +514,112 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
+<h2 id="_make_drive_space_for_fedora_install">Make Drive Space for Fedora Install</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You probably already have Windows installed on your PC or laptop. This
+installation is likely taking up nearly the whole drive so you need to make
+space for Linux.</p>
+</div>
+<div class="paragraph">
+<p>Good news: Recent versions of Windows allow you to easily resize the primary
+partition (C:) using a built-in utility.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_download_fedora_silverblue">Download Fedora Silverblue</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Get installation media here: <a href="https://silverblue.fedoraproject.org/download" class="bare">https://silverblue.fedoraproject.org/download</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_write_silverblue_installer_to_usb_drive">Write Silverblue Installer to USB Drive</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Use the Fedora Media Writer or your favorite disk image writing tool.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_install_fedora_silverblue">Install Fedora Silverblue</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Boot from the USB disk</p>
+</li>
+<li>
+<p>Select automatic partitioning</p>
+</li>
+<li>
+<p>Wait 10-20 minutes while installer does its thing</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_firstboot_questions">Firstboot Questions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Enable third party software repositories so you can use closed-source
+software like proprietary GPU drivers (nvidia) and Google Chrome.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_set_the_hostname">Set the hostname</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre>sudo hostnamectl set-hostname machinename</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_install_silverblue_packages">Install Silverblue Packages</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Update all packages</p>
+<p>Before doing anything else, go ahead and update all packages.</p>
+</div>
+<div class="paragraph">
+<p>First, cancel any automatically running rpm-ostree tasks:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>sudo rpm-ostree update</pre>
+<pre>sudo rpm-ostree cancel</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Install additional packages</p>
+<p>Then refresh package metadata:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>sudo rpm-ostree upgrade
-rpm-ostree install ccache chrpath diffstat docbook5-schemas docbook-dtds gcc-c++ java-1.8.0-openjdk libzip mesa-libGL-devel minicom openjade pandoc perl-bignum perl-Thread-Queue python2 python3-GitPython python3-jinja2 rpcgen rubygem-asciidoctor SDL-devel socat strace texinfo wireguard-tools xterm google-chrome</pre>
+<pre>sudo rpm-ostree refresh-md</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Finally reboot to use all new pacakges</p>
+<p>Perform an atomic system upgrade:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sudo rpm-ostree upgrade</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Install additional layered packages. NOTE: These are the packages that I need in my everyday work/life:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>rpm-ostree install ccache chrpath diffstat docbook5-schemas docbook-dtds gcc-c++ java-1.8.0-openjdk libzip mesa-libGL-devel minicom openjade pandoc perl-bignum perl-Thread-Queue python2 python3-GitPython python3-jinja2 rpcgen rubygem-asciidoctor SDL-devel socat strace texinfo wireguard-tools xterm google-chrome</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally reboot to use all new packages:</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -531,18 +629,11 @@ rpm-ostree install ccache chrpath diffstat docbook5-schemas docbook-dtds gcc-c++
 </div>
 </div>
 <div class="sect1">
-<h2 id="_set_the_hostname">Set the hostname</h2>
-<div class="sectionbody">
-<div class="literalblock">
-<div class="content">
-<pre>sudo hostnamectl set-hostname z13</pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="_enable_sshd">Enable sshd</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Optional: Enable SSH access to your machine</p>
+</div>
 <div class="literalblock">
 <div class="content">
 <pre>sudo systemctl enable sshd.service --now</pre>
@@ -551,10 +642,18 @@ rpm-ostree install ccache chrpath diffstat docbook5-schemas docbook-dtds gcc-c++
 </div>
 </div>
 <div class="sect1">
-<h2 id="_download_tarballs_for_vs_code_and_rider">Download tarballs for VS Code and Rider</h2>
+<h2 id="_clone_this_repo">Clone this repo</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Extract the tarballs underneath ~/Toolchains</p>
+<p>The new-machine-quick-setup-guide git repository contains this guide along with
+some useful scripts we will run:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>cd ~/Code
+git clone https://github.com/xtianbetz/new-machine-quick-setup-guide.git
+cd new-machine-quick-setup-guide</pre>
+</div>
 </div>
 </div>
 </div>
@@ -562,7 +661,12 @@ rpm-ostree install ccache chrpath diffstat docbook5-schemas docbook-dtds gcc-c++
 <h2 id="_install_flatpaks_for_chromium_and_spotify">Install Flatpaks for Chromium and Spotify</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Run the 'bin/setup-flatpak-apps.sh' script</p>
+<p>Run 'bin/setup-flatpak-apps.sh' script:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>./bin/setup-flatpak-apps.sh</pre>
+</div>
 </div>
 </div>
 </div>
@@ -575,8 +679,8 @@ rpm-ostree install ccache chrpath diffstat docbook5-schemas docbook-dtds gcc-c++
 <div class="literalblock">
 <div class="content">
 <pre>[user]
-	email = christian.betz@gmail.com
-	name = Christian Betz
+	email = your.name@company.com
+	name = Your Name
 [init]
 	defaultBranch = main</pre>
 </div>
@@ -593,19 +697,26 @@ rpm-ostree install ccache chrpath diffstat docbook5-schemas docbook-dtds gcc-c++
 <p>You also want git-prompt.sh which will give you a nice bash prompt.</p>
 </div>
 <div class="paragraph">
-<p>Create a ~/.bashrc.d directory and copy both files there.</p>
+<p>The default bashrc/bash_profile on recent Fedora versions automatically searches for a .bashrc.d folder.</p>
+</div>
+<div class="paragraph">
+<p>Just create a ~/.bashrc.d directory and copy both files there.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>mkdir -p ~/.bashrc.d</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Make sure to adjust any paths in x.sh for your desired tool versions.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_keyboard_shortcuts">Keyboard Shortcuts</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Ctrl+Alt+T for new terminal</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Use gnome keyboard settings to add a custom mapping so Ctrl+Alt+T launches a new terminal</p>
 </div>
 </div>
 </div>
@@ -613,8 +724,7 @@ rpm-ostree install ccache chrpath diffstat docbook5-schemas docbook-dtds gcc-c++
 <h2 id="_install_dotnet">Install dotnet</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Download the latest dotnet and extract in $HOME/Toolchains. Configure PATH
-accordingly in bashrc as shown above.</p>
+<p>Download the latest dotnet and extract in $HOME/Toolchains.</p>
 </div>
 <div class="paragraph">
 <p>Prevent build related to openssl errors by modifying /etc/ssl/openssl.cnf and
@@ -631,8 +741,7 @@ commenting the line as shown here:</p>
 <h2 id="_install_node_yarn">Install Node, Yarn</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Download node and extract it in $HOME/Toolchains. Configure your PATH
-accordingly as shown above.</p>
+<p>Download node and extract it in $HOME/Toolchains.</p>
 </div>
 <div class="paragraph">
 <p>Use the following commands to configure 'npm' to install "global" packages into
@@ -662,7 +771,7 @@ git clone git@github.com:xtianbetz/.vim.git nvim --recurse-submodules</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Inside nvim you will need to install interesting things:</p>
+<p>Inside nvim you will need to install a few interesting things:</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -741,8 +850,16 @@ StartupNotify=true</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_rust_with_arm_target_support">Rust with ARM Target Support</h2>
+<h2 id="_install_rust_with_arm_target_support">Install Rust with ARM Target Support</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Get rustup:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</pre>
+</div>
+</div>
 <div class="paragraph">
 <p>Install rust stable</p>
 </div>
@@ -774,11 +891,14 @@ linker = "arm-none-linux-gnueabihf-gcc"</pre>
 <div class="sect1">
 <h2 id="_add_user_to_dialout_group_to_allow_use_of_serial_ports">Add user to dialout group to allow use of serial ports</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Let your user use serial ports like /dev/ttyUSB0</p>
+</div>
 <div class="literalblock">
 <div class="content">
 <pre>sudo su
 grep -E '^dialout:' /usr/lib/group &gt;&gt; /etc/group
-usermod -aG dialout x</pre>
+usermod -aG dialout yourusername</pre>
 </div>
 </div>
 </div>
@@ -791,7 +911,7 @@ usermod -aG dialout x</pre>
 rpm-ostree and rebooting.</p>
 </div>
 <div class="paragraph">
-<p>The following command will allow making this document within toolbox:</p>
+<p>For example the following command will allow making this document within a toolbox:</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -804,7 +924,7 @@ sudo dnf install fuse fuse-libs rubygem-asciidoctor make pandoc</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-09 12:42:59 -0400
+Last updated 2022-07-09 14:30:02 -0400
 </div>
 </div>
 </body>
