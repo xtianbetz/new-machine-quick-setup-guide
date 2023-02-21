@@ -75,7 +75,7 @@ Perform an atomic system upgrade:
 Install additional layered packages. NOTE: These are the packages that I
 need in my everyday work/life:
 
-    rpm-ostree install ccache chrpath diffstat docbook5-schemas docbook-dtds gcc-c++ java-1.8.0-openjdk libzip mesa-libGL-devel minicom openjade pandoc perl-bignum perl-Thread-Queue python2 python3-GitPython python3-jinja2 rpcgen rubygem-asciidoctor SDL-devel socat strace texinfo wireguard-tools xterm google-chrome
+    rpm-ostree install ccache chrpath diffstat docbook5-schemas docbook-dtds gcc-c++ java-1.8.0-openjdk libzip mesa-libGL-devel minicom openjade pandoc perl-bignum perl-Thread-Queue python2 python3-GitPython python3-jinja2 rpcgen rubygem-asciidoctor SDL-devel socat strace texinfo wireguard-tools xterm google-chrome pwgen
 
 Finally reboot to use all new packages:
 
@@ -140,6 +140,12 @@ Prevent build related to openssl errors by modifying
 /etc/ssl/openssl.cnf and commenting the line as shown here:
 
     #openssl_conf = openssl_init
+
+To prevent errors related to libicu, you must set an environment
+variable so that dotnet knows to look for a specific libicu version. The
+'bash/x.sh' file already includes the following:
+
+    export CLR_ICU_VERSION_OVERRIDE="71.1"
 
 # Install Node, Yarn
 

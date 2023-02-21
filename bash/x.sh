@@ -38,7 +38,7 @@ export PATH="$HOME/Toolchains/gcc-arm-10.2-2020.11-x86_64-arm-none-linux-gnueabi
 export ANDROID_SDK_ROOT="$HOME/Toolchains/android-sdk"
 export PATH="$ANDROID_SDK_ROOT/cmdline-tools/tools/bin:$PATH"
 
-export PATH="$HOME/Toolchains/watchman-v2021.05.24.00-linux/bin:$PATH"
+#export PATH="$HOME/Toolchains/watchman-v2021.05.24.00-linux/bin:$PATH"
 
 export ANDROID_HOME=$ANDROID_SDK_ROOT
 export PATH=$PATH:$ANDROID_HOME/emulator
@@ -51,4 +51,6 @@ export PATH="$HOME/Toolchains/node-v14.18.1-linux-x64/bin:$PATH"
 
 export ATTENDANT_IP=192.168.3.51
 . "$HOME/.cargo/env"
+
+export CLR_ICU_VERSION_OVERRIDE="71.1"
 
