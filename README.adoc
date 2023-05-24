@@ -72,7 +72,8 @@ sudo rpm-ostree upgrade
 Install additional layered packages. NOTE: These are the packages that I need in my everyday work/life:
 
 ....
-rpm-ostree install ccache chrpath diffstat docbook5-schemas docbook-dtds gcc-c++ java-1.8.0-openjdk libzip mesa-libGL-devel minicom openjade pandoc perl-bignum perl-Thread-Queue python2 python3-GitPython python3-jinja2 rpcgen rubygem-asciidoctor SDL-devel socat strace texinfo wireguard-tools xterm google-chrome pwgen
+rpm-ostree install ccache chrpath diffstat docbook5-schemas docbook-dtds gcc-c++ java-1.8.0-openjdk libzip mesa-libGL-devel minicom openjade pandoc perl-bignum perl-Thread-Queue python2 python3-GitPython python3-jinja2 rpcgen rubygem-asciidoctor SDL-devel socat strace texinfo wireguard-tools xterm google-chrome pwgen autoconf automake binutils bison flex gdb glibc-devel libtool make byacc cscope ctags elfutils indent ltrace perf valgrind ElectricFence astyle cbmc check cmake coan cproto insight nasm pscan python3-scons remake scorep splint yasm zzuf picocom libusb1-devel libhid-devel
+
 ....
 
 Finally reboot to use all new packages:
