@@ -72,7 +72,7 @@ sudo rpm-ostree upgrade
 Install additional layered packages. NOTE: These are the packages that I need in my everyday work/life:
 
 ....
-rpm-ostree install ccache chrpath diffstat docbook5-schemas docbook-dtds gcc-c++ java-1.8.0-openjdk libzip mesa-libGL-devel minicom openjade pandoc perl-bignum perl-Thread-Queue python2 python3-GitPython python3-jinja2 rpcgen rubygem-asciidoctor SDL-devel socat strace texinfo wireguard-tools xterm google-chrome pwgen autoconf automake binutils bison flex gdb glibc-devel libtool make byacc cscope ctags elfutils indent ltrace perf valgrind ElectricFence astyle cbmc check cmake coan cproto insight nasm pscan python3-scons remake scorep splint yasm zzuf picocom libusb1-devel libhid-devel
+rpm-ostree install ccache chrpath diffstat docbook5-schemas docbook-dtds gcc-c++ java-1.8.0-openjdk libzip mesa-libGL-devel minicom openjade pandoc perl-bignum perl-Thread-Queue python2 python3-GitPython python3-jinja2 rpcgen rubygem-asciidoctor SDL-devel socat strace texinfo wireguard-tools xterm google-chrome pwgen autoconf automake binutils bison flex gdb glibc-devel libtool make byacc cscope ctags elfutils indent ltrace perf valgrind ElectricFence astyle cbmc check cmake coan cproto insight nasm pscan python3-scons remake scorep splint yasm zzuf picocom libusb1-devel libhid-devel openssl1.1
 
 ....
 
@@ -156,7 +156,7 @@ To prevent errors related to libicu, you must set an environment variable so tha
 knows to look for a specific libicu version. The 'bash/x.sh' file already includes the following:
 
 ....
-export CLR_ICU_VERSION_OVERRIDE="71.1"
+export CLR_ICU_VERSION_OVERRIDE="72.1"
 ....
 
 == Install Node, Yarn
